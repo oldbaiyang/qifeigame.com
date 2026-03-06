@@ -23,13 +23,13 @@
 
       <!-- 开始游戏提示（首次进入） -->
       <div v-if="!gameStarted" class="start-hint">
-        <h2 class="start-title">极限脑力：动态数人头</h2>
-        <p class="start-desc">观察人物进出，挑战你的记忆力</p>
+        <h2 class="start-title">{{ $t('game.title') }}：{{ $t('game.subtitle') }}</h2>
+        <p class="start-desc">{{ $t('game.description') }}</p>
         <button class="start-btn" @click="handleStartGame">
-          开始游戏
+          {{ $t('game.startGame') }}
         </button>
         <button class="rules-btn" @click="showRulesModal = true">
-          游戏说明
+          {{ $t('game.gameRules') }}
         </button>
       </div>
     </div>
@@ -75,6 +75,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import RulesModal from './components/RulesModal.vue'
 import StatusBar from './components/StatusBar.vue'
 import NumericKeypad from './components/NumericKeypad.vue'
@@ -87,6 +88,8 @@ import { calculateScore } from './config/levelConfig'
 import { audioManager } from './utils/audioManager'
 import { generatePoster, formatDate } from './utils/posterGenerator'
 import { SoundType } from './game/types'
+
+const { t } = useI18n()
 
 // 引用
 const canvasContainer = ref<HTMLElement | null>(null)
@@ -141,13 +144,13 @@ const initGame = async () => {
 
     switch (state) {
       case GameState.PREPARING:
-        hintText.value = '请记住人数'
+        hintText.value = t('game.rememberCount')
         break
       case GameState.ANIMATING:
-        hintText.value = '观察人物进出'
+        hintText.value = t('game.observeMovement')
         break
       case GameState.WAITING_INPUT:
-        hintText.value = '房屋里有几人？'
+        hintText.value = t('game.howMany')
         break
       case GameState.SETTLING:
         hintText.value = ''

@@ -1,12 +1,12 @@
 <template>
   <div class="status-bar">
     <div class="status-item">
-      <span class="status-label">关卡</span>
+      <span class="status-label">{{ $t('common.level') }}</span>
       <span class="status-value">{{ level }}</span>
     </div>
 
     <div class="status-item">
-      <span class="status-label">生命</span>
+      <span class="status-label">{{ $t('common.lives') }}</span>
       <div class="lives">
         <span
           v-for="i in maxLives"
@@ -20,13 +20,19 @@
     </div>
 
     <div class="status-item">
-      <span class="status-label">分数</span>
+      <span class="status-label">{{ $t('common.score') }}</span>
       <span class="status-value">{{ score }}</span>
+    </div>
+
+    <div class="lang-switcher-wrapper">
+      <LanguageSwitcher />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import LanguageSwitcher from './LanguageSwitcher.vue'
+
 defineProps<{
   level: number
   lives: number
@@ -51,6 +57,10 @@ defineProps<{
   flex-direction: column;
   align-items: center;
   gap: 2px;
+}
+
+.lang-switcher-wrapper {
+  margin-left: auto;
 }
 
 .status-label {

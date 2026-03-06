@@ -8,7 +8,7 @@
         inputmode="numeric"
         pattern="[0-9]*"
         :disabled="!enabled"
-        placeholder="输入人数"
+        :placeholder="$t('game.inputNumber')"
         class="answer-input"
         @keyup.enter="handleConfirm"
       />
@@ -20,19 +20,19 @@
         :disabled="!enabled || !hasAnswer"
         @click="handleClear"
       >
-        清空
+        {{ $t('game.clear') }}
       </button>
       <button
         class="btn btn-confirm"
         :disabled="!enabled || !hasAnswer"
         @click="handleConfirm"
       >
-        确认
+        {{ $t('common.confirm') }}
       </button>
     </div>
 
     <button class="btn-restart" @click="handleRestart">
-      🔄 重新开始
+      🔄 {{ $t('common.restart') }}
     </button>
   </div>
 </template>

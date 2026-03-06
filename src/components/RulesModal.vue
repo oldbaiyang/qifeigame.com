@@ -4,63 +4,63 @@
       <div class="modal-content">
         <button class="close-btn" @click="handleClose">×</button>
 
-        <h2 class="modal-title">游戏说明</h2>
+        <h2 class="modal-title">{{ $t('rules.title') }}</h2>
 
         <div class="rules">
           <div class="rule-item">
             <div class="rule-number">1</div>
             <div class="rule-text">
-              <strong>观察初始人数</strong>
-              <p>屏幕中央会显示初始人物，请记住人数</p>
+              <strong>{{ $t('rules.step1Title') }}</strong>
+              <p>{{ $t('rules.step1Desc') }}</p>
             </div>
           </div>
 
           <div class="rule-item">
             <div class="rule-number">2</div>
             <div class="rule-text">
-              <strong>房屋降落</strong>
-              <p>房子从天而降，遮挡住所有人物</p>
+              <strong>{{ $t('rules.step2Title') }}</strong>
+              <p>{{ $t('rules.step2Desc') }}</p>
             </div>
           </div>
 
           <div class="rule-item">
             <div class="rule-number">3</div>
             <div class="rule-text">
-              <strong>观察进出</strong>
-              <p>人物从左侧进入房屋，或从房屋走出到右侧</p>
+              <strong>{{ $t('rules.step3Title') }}</strong>
+              <p>{{ $t('rules.step3Desc') }}</p>
             </div>
           </div>
 
           <div class="rule-item">
             <div class="rule-number">4</div>
             <div class="rule-text">
-              <strong>计算答案</strong>
-              <p>最终人数 = 初始人数 + 进入人数 - 离开人数</p>
+              <strong>{{ $t('rules.step4Title') }}</strong>
+              <p>{{ $t('rules.step4Desc') }}</p>
             </div>
           </div>
 
           <div class="rule-item">
             <div class="rule-number">5</div>
             <div class="rule-text">
-              <strong>输入答案</strong>
-              <p>动画结束后输入房屋内的最终人数</p>
+              <strong>{{ $t('rules.step5Title') }}</strong>
+              <p>{{ $t('rules.step5Desc') }}</p>
             </div>
           </div>
         </div>
 
         <div class="game-rules">
-          <h3>游戏规则</h3>
+          <h3>{{ $t('rules.gameRulesTitle') }}</h3>
           <ul>
-            <li>初始 <strong>3 条生命</strong></li>
-            <li>答对进入下一关，获得分数</li>
-            <li>答错扣除 1 条生命，重新挑战当前关卡</li>
-            <li>生命值耗尽游戏结束</li>
-            <li>难度随关卡递增</li>
+            <li v-html="$t('rules.rule1')"></li>
+            <li>{{ $t('rules.rule2') }}</li>
+            <li>{{ $t('rules.rule3') }}</li>
+            <li>{{ $t('rules.rule4') }}</li>
+            <li>{{ $t('rules.rule5') }}</li>
           </ul>
         </div>
 
         <button class="modal-btn" @click="handleClose">
-          开始挑战
+          {{ $t('rules.startChallenge') }}
         </button>
       </div>
     </div>

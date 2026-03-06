@@ -2,16 +2,16 @@
   <Teleport to="body">
     <div v-if="visible" class="modal-overlay" @click.self="handleCancel">
       <div class="modal-content">
-        <h2 class="modal-title">重新开始？</h2>
+        <h2 class="modal-title">{{ $t('confirm.restartTitle') }}</h2>
         <p class="modal-message">
-          这将重置关卡、生命值和分数
+          {{ $t('confirm.restartMessage') }}
         </p>
         <div class="modal-buttons">
           <button class="modal-btn secondary" @click="handleCancel">
-            取消
+            {{ $t('common.cancel') }}
           </button>
           <button class="modal-btn primary" @click="handleConfirm">
-            确认重置
+            {{ $t('common.confirm') }}
           </button>
         </div>
       </div>

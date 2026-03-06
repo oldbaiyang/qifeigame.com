@@ -5,31 +5,31 @@
         <!-- 正确/错误结果 -->
         <template v-if="!isGameOver">
           <h2 class="modal-title" :class="isCorrect ? 'success' : 'error'">
-            {{ isCorrect ? '正确!' : '错误!' }}
+            {{ isCorrect ? $t('game.correct') : $t('game.wrong') }}
           </h2>
           <p class="modal-message">
-            {{ isCorrect ? '太棒了，继续挑战!' : `正确答案是 ${correctAnswer}` }}
+            {{ isCorrect ? $t('game.greatJob') : `${$t('game.correctAnswer')} ${correctAnswer}` }}
           </p>
           <div class="modal-score">+{{ earnedScore }}</div>
           <div class="modal-buttons">
             <button class="modal-btn primary" @click="handleNext">
-              {{ isCorrect ? '下一关' : '再试一次' }}
+              {{ isCorrect ? $t('common.next') : $t('common.tryAgain') }}
             </button>
           </div>
         </template>
 
         <!-- 游戏结束 -->
         <template v-else>
-          <h2 class="modal-title error">游戏结束</h2>
-          <p class="modal-message">你的脑力已达极限!</p>
+          <h2 class="modal-title error">{{ $t('game.gameOver') }}</h2>
+          <p class="modal-message">{{ $t('game.brainLimit') }}</p>
           <div class="modal-score">{{ finalScore }}</div>
-          <p class="modal-message">最高分: {{ highScore }}</p>
+          <p class="modal-message">{{ $t('common.highScore') }}: {{ highScore }}</p>
           <div class="modal-buttons">
             <button class="modal-btn primary" @click="handleRestart">
-              重新开始
+              {{ $t('common.restart') }}
             </button>
             <button class="modal-btn secondary" @click="handleShare">
-              分享成绩
+              {{ $t('common.share') }}
             </button>
           </div>
         </template>
