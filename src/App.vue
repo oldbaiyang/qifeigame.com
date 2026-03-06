@@ -1,81 +1,80 @@
 <template>
   <div id="app">
-    <!-- 开始界面 -->
-    <StartScreen
-      v-if="showStartScreen"
-      :high-score="gameData.highScore"
-      :last-level="gameData.currentLevel"
-      @start="handleStartGame"
-      @show-rules="showRulesModal = true"
-    />
-
     <!-- 游戏说明弹窗 -->
     <RulesModal
       :visible="showRulesModal"
       @close="showRulesModal = false"
     />
 
-    <!-- 游戏主界面 -->
-    <template v-if="!showStartScreen">
-      <!-- 顶部状态栏 -->
-      <StatusBar
-        :level="gameData.currentLevel"
-        :lives="gameData.lives"
-        :max-lives="gameData.maxLives"
-        :score="gameData.score"
-      />
+    <!-- 顶部状态栏 -->
+    <StatusBar
+      :level="gameData.currentLevel"
+      :lives="gameData.lives"
+      :max-lives="gameData.maxLives"
+      :score="gameData.score"
+    />
 
-      <!-- 游戏画布容器 -->
-      <div ref="canvasContainer" class="game-canvas-container">
-        <!-- 提示文字 -->
-        <div v-if="hintText" class="hint-text">
-          {{ hintText }}
-        </div>
+    <!-- 游戏画布容器 -->
+    <div ref="canvasContainer" class="game-canvas-container">
+      <!-- 提示文字 -->
+      <div v-if="hintText" class="hint-text">
+        {{ hintText }}
       </div>
 
-      <!-- 九宫格键盘 -->
-      <NumericKeypad
-        ref="keypadRef"
-        :enabled="canInput"
-        @input="handleInput"
-        @confirm="handleConfirm"
-        @restart="showConfirmRestart = true"
-      />
+      <!-- 开始游戏提示（首次进入） -->
+      <div v-if="!gameStarted" class="start-hint">
+        <h2 class="start-title">极限脑力：动态数人头</h2>
+        <p class="start-desc">观察人物进出，挑战你的记忆力</p>
+        <button class="start-btn" @click="handleStartGame">
+          开始游戏
+        </button>
+        <button class="rules-btn" @click="showRulesModal = true">
+          游戏说明
+        </button>
+      </div>
+    </div>
 
-      <!-- 结果弹窗 -->
-      <ResultModal
-        :visible="showResultModal"
-        :is-correct="isCorrect"
-        :is-game-over="isGameOver"
-        :correct-answer="correctAnswer"
-        :earned-score="earnedScore"
-        :final-score="gameData.score"
-        :high-score="gameData.highScore"
-        @next="handleNextLevel"
-        @restart="handleRestart"
-        @share="handleShare"
-      />
+    <!-- 九宫格键盘 -->
+    <NumericKeypad
+      ref="keypadRef"
+      :enabled="canInput"
+      @input="handleInput"
+      @confirm="handleConfirm"
+      @restart="showConfirmRestart = true"
+    />
 
-      <!-- 确认重新开始弹窗 -->
-      <ConfirmModal
-        :visible="showConfirmRestart"
-        @confirm="handleConfirmRestart"
-        @cancel="showConfirmRestart = false"
-      />
+    <!-- 结果弹窗 -->
+    <ResultModal
+      :visible="showResultModal"
+      :is-correct="isCorrect"
+      :is-game-over="isGameOver"
+      :correct-answer="correctAnswer"
+      :earned-score="earnedScore"
+      :final-score="gameData.score"
+      :high-score="gameData.highScore"
+      @next="handleNextLevel"
+      @restart="handleRestart"
+      @share="handleShare"
+    />
 
-      <!-- 海报预览 -->
-      <PosterPreview
-        :visible="showPosterPreview"
-        :poster-url="posterUrl"
-        @close="showPosterPreview = false"
-      />
-    </template>
+    <!-- 确认重新开始弹窗 -->
+    <ConfirmModal
+      :visible="showConfirmRestart"
+      @confirm="handleConfirmRestart"
+      @cancel="showConfirmRestart = false"
+    />
+
+    <!-- 海报预览 -->
+    <PosterPreview
+      :visible="showPosterPreview"
+      :poster-url="posterUrl"
+      @close="showPosterPreview = false"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import StartScreen from './components/StartScreen.vue'
 import RulesModal from './components/RulesModal.vue'
 import StatusBar from './components/StatusBar.vue'
 import NumericKeypad from './components/NumericKeypad.vue'
@@ -104,7 +103,7 @@ const currentState = ref(stateMachine.state)
 const canInput = computed(() => currentState.value === GameState.WAITING_INPUT)
 
 // 弹窗状态
-const showStartScreen = ref(true)
+const gameStarted = ref(false)
 const showRulesModal = ref(false)
 const showResultModal = ref(false)
 const showConfirmRestart = ref(false)
@@ -159,7 +158,7 @@ const initGame = async () => {
 
 // 开始游戏
 const handleStartGame = () => {
-  showStartScreen.value = false
+  gameStarted.value = true
   // 延迟启动游戏，等待界面渲染
   setTimeout(() => {
     startLevel()
@@ -304,6 +303,63 @@ onUnmounted(() => {
   animation: fadeIn 0.3s ease;
   background: transparent;
   padding: 8px 24px;
+}
+
+.start-hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
+  animation: fadeIn 0.5s ease;
+}
+
+.start-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 12px;
+}
+
+.start-desc {
+  font-size: 16px;
+  color: #666666;
+  margin-bottom: 32px;
+}
+
+.start-btn,
+.rules-btn {
+  display: block;
+  width: 240px;
+  height: 50px;
+  margin: 0 auto 12px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.start-btn {
+  background: #000000;
+  color: #ffffff;
+}
+
+.start-btn:active {
+  transform: scale(0.98);
+  background: #333333;
+}
+
+.rules-btn {
+  background: #ffffff;
+  color: #000000;
+}
+
+.rules-btn:active {
+  transform: scale(0.98);
+  background: #f0f0f0;
 }
 
 @keyframes fadeIn {
