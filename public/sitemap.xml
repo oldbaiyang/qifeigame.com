@@ -1,12 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- 主页 - 简体中文 -->
   <url>
     <loc>https://qifeigame.com/</loc>
     <lastmod>2026-03-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://qifeigame.com/?lang=zh-CN" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://qifeigame.com/?lang=zh-TW" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://qifeigame.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://qifeigame.com/?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qifeigame.com/" />
   </url>
+
+  <!-- 简体中文版本 -->
+  <url>
+    <loc>https://qifeigame.com/?lang=zh-CN</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://qifeigame.com/?lang=zh-CN" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://qifeigame.com/?lang=zh-TW" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://qifeigame.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://qifeigame.com/?lang=ja" />
+  </url>
+
+  <!-- 繁体中文版本 -->
+  <url>
+    <loc>https://qifeigame.com/?lang=zh-TW</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://qifeigame.com/?lang=zh-CN" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://qifeigame.com/?lang=zh-TW" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://qifeigame.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://qifeigame.com/?lang=ja" />
+  </url>
+
+  <!-- 英语版本 -->
+  <url>
+    <loc>https://qifeigame.com/?lang=en</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://qifeigame.com/?lang=zh-CN" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://qifeigame.com/?lang=zh-TW" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://qifeigame.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://qifeigame.com/?lang=ja" />
+  </url>
+
+  <!-- 日语版本 -->
+  <url>
+    <loc>https://qifeigame.com/?lang=ja</loc>
+    <lastmod>2026-03-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://qifeigame.com/?lang=zh-CN" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://qifeigame.com/?lang=zh-TW" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://qifeigame.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://qifeigame.com/?lang=ja" />
+  </url>
+
 </urlset>
