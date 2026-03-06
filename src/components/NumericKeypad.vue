@@ -55,18 +55,18 @@ const inputRef = ref<HTMLInputElement | null>(null)
 
 // 计算是否有输入
 const hasAnswer = computed(() => {
-  const str = String(answer.value || '').trim()
+  const str = String(answer.value ?? '').trim()
   return str.length > 0
 })
 
 // 监听输入变化
 watch(answer, (newValue) => {
-  const str = String(newValue || '')
+  const str = String(newValue ?? '')
   // 限制最多3位数字
   if (str.length > 3) {
     answer.value = str.slice(0, 3)
   }
-  emit('input', String(answer.value || ''))
+  emit('input', String(answer.value ?? ''))
 })
 
 // 监听启用状态，自动聚焦
@@ -86,7 +86,7 @@ const handleClear = () => {
 
 const handleConfirm = () => {
   console.log('[NumericKeypad] handleConfirm called, answer:', answer.value, 'type:', typeof answer.value)
-  const answerStr = String(answer.value || '').trim()
+  const answerStr = String(answer.value ?? '').trim()
   if (answerStr.length > 0) {
     emit('confirm', answerStr)
   } else {
