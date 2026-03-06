@@ -1,62 +1,82 @@
 <template>
   <div id="app">
-    <!-- 顶部状态栏 -->
-    <StatusBar
-      :level="gameData.currentLevel"
-      :lives="gameData.lives"
-      :max-lives="gameData.maxLives"
-      :score="gameData.score"
-    />
-
-    <!-- 游戏画布容器 -->
-    <div ref="canvasContainer" class="game-canvas-container">
-      <!-- 提示文字 -->
-      <div v-if="hintText" class="hint-text">
-        {{ hintText }}
-      </div>
-    </div>
-
-    <!-- 九宫格键盘 -->
-    <NumericKeypad
-      ref="keypadRef"
-      :enabled="canInput"
-      @input="handleInput"
-      @confirm="handleConfirm"
-      @restart="showConfirmRestart = true"
-    />
-
-    <!-- 结果弹窗 -->
-    <ResultModal
-      :visible="showResultModal"
-      :is-correct="isCorrect"
-      :is-game-over="isGameOver"
-      :correct-answer="correctAnswer"
-      :earned-score="earnedScore"
-      :final-score="gameData.score"
+    <!-- 开始界面 -->
+    <StartScreen
+      v-if="showStartScreen"
       :high-score="gameData.highScore"
-      @next="handleNextLevel"
-      @restart="handleRestart"
-      @share="handleShare"
+      :last-level="gameData.currentLevel"
+      @start="handleStartGame"
+      @show-rules="showRulesModal = true"
     />
 
-    <!-- 确认重新开始弹窗 -->
-    <ConfirmModal
-      :visible="showConfirmRestart"
-      @confirm="handleConfirmRestart"
-      @cancel="showConfirmRestart = false"
+    <!-- 游戏说明弹窗 -->
+    <RulesModal
+      :visible="showRulesModal"
+      @close="showRulesModal = false"
     />
 
-    <!-- 海报预览 -->
-    <PosterPreview
-      :visible="showPosterPreview"
-      :poster-url="posterUrl"
-      @close="showPosterPreview = false"
-    />
+    <!-- 游戏主界面 -->
+    <template v-if="!showStartScreen">
+      <!-- 顶部状态栏 -->
+      <StatusBar
+        :level="gameData.currentLevel"
+        :lives="gameData.lives"
+        :max-lives="gameData.maxLives"
+        :score="gameData.score"
+      />
+
+      <!-- 游戏画布容器 -->
+      <div ref="canvasContainer" class="game-canvas-container">
+        <!-- 提示文字 -->
+        <div v-if="hintText" class="hint-text">
+          {{ hintText }}
+        </div>
+      </div>
+
+      <!-- 九宫格键盘 -->
+      <NumericKeypad
+        ref="keypadRef"
+        :enabled="canInput"
+        @input="handleInput"
+        @confirm="handleConfirm"
+        @restart="showConfirmRestart = true"
+      />
+
+      <!-- 结果弹窗 -->
+      <ResultModal
+        :visible="showResultModal"
+        :is-correct="isCorrect"
+        :is-game-over="isGameOver"
+        :correct-answer="correctAnswer"
+        :earned-score="earnedScore"
+        :final-score="gameData.score"
+        :high-score="gameData.highScore"
+        @next="handleNextLevel"
+        @restart="handleRestart"
+        @share="handleShare"
+      />
+
+      <!-- 确认重新开始弹窗 -->
+      <ConfirmModal
+        :visible="showConfirmRestart"
+        @confirm="handleConfirmRestart"
+        @cancel="showConfirmRestart = false"
+      />
+
+      <!-- 海报预览 -->
+      <PosterPreview
+        :visible="showPosterPreview"
+        :poster-url="posterUrl"
+        @close="showPosterPreview = false"
+      />
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import StartScreen from './components/StartScreen.vue'
+import RulesModal from './components/RulesModal.vue'
 import StatusBar from './components/StatusBar.vue'
 import NumericKeypad from './components/NumericKeypad.vue'
 import ResultModal from './components/ResultModal.vue'
@@ -84,6 +104,8 @@ const currentState = ref(stateMachine.state)
 const canInput = computed(() => currentState.value === GameState.WAITING_INPUT)
 
 // 弹窗状态
+const showStartScreen = ref(true)
+const showRulesModal = ref(false)
 const showResultModal = ref(false)
 const showConfirmRestart = ref(false)
 const isCorrect = ref(false)
@@ -133,9 +155,15 @@ const initGame = async () => {
         break
     }
   })
+}
 
-  // 开始第一关
-  startLevel()
+// 开始游戏
+const handleStartGame = () => {
+  showStartScreen.value = false
+  // 延迟启动游戏，等待界面渲染
+  setTimeout(() => {
+    startLevel()
+  }, 100)
 }
 
 // 开始关卡
