@@ -84,6 +84,7 @@ export class StateMachine {
     this._data.lives = this._data.maxLives
     this._data.score = 0
     this._data.currentAnswer = ''
+    this._state = GameState.PREPARING
     this.saveLastLevel(1)
     this.saveLives(this._data.maxLives) // 重置时也保存生命值
     this.notifyListeners()

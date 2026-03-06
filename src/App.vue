@@ -236,6 +236,8 @@ const handleNextLevel = () => {
 const handleRestart = () => {
   stateMachine.resetLevel()
   updateGameData()
+  isGameOver.value = false
+  isCorrect.value = false
   startLevel()
 }
 
