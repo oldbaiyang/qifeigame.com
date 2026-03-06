@@ -11,7 +11,6 @@ export class ObjectPool {
 
   // 小人绘制参数
   private readonly PERSON_WIDTH = 30
-  private readonly PERSON_HEIGHT = 60
   private readonly PERSON_COLOR = 0x000000
 
   constructor(container: Container, poolSize: number = 50) {

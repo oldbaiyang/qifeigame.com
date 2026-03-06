@@ -1,4 +1,4 @@
-import { Application, Container, Graphics, Text, TextStyle } from 'pixi.js'
+import { Application, Container, Graphics } from 'pixi.js'
 import gsap from 'gsap'
 import { ObjectPool } from './ObjectPool'
 import { ScriptGenerator } from './ScriptGenerator'
@@ -44,7 +44,6 @@ export class GameEngine {
   private readonly HOUSE_WIDTH = 200
   private readonly HOUSE_HEIGHT = 160
   private readonly PERSON_WIDTH = 30
-  private readonly PERSON_HEIGHT = 60
 
   // 回调
   private onAnimationComplete?: () => void
@@ -389,7 +388,6 @@ export class GameEngine {
       }
     })
 
-    const doorCenterX = 0 // 门在房子中央
     const rightEdge = this.HOUSE_WIDTH / 2 + 150
 
     // 从门的位置淡入出现
