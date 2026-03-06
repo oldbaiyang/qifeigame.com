@@ -73,7 +73,7 @@ export function setLocale(locale: string) {
 // 语言选项
 export const localeOptions = [
   { value: 'zh-CN', label: '简体中文', flag: '🇨🇳' },
-  { value: 'zh-TW', label: '繁體中文', flag: '🇹🇼' },
+  { value: 'zh-TW', label: '繁體中文', flag: '🇭🇰' },
   { value: 'en', label: 'English', flag: '🇺🇸' },
   { value: 'ja', label: '日本語', flag: '🇯🇵' }
 ]
